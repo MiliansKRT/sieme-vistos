@@ -1,0 +1,209 @@
+@use 'variables' as v;
+
+#home {
+    background-color: #f0f2f5; 
+    padding: 60px 6%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .home-container {
+        width: 100%;
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: center;
+        background: v.$branco; 
+        padding: 40px;
+        border-radius: 40px; // Mesma curvatura do About
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .home-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 25px;
+        animation: fadeInUp 1s ease-out forwards; 
+    }
+
+    .home-title {
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        font-weight: 800;
+        color: v.$azul-profundo;
+        line-height: 1.2;
+
+        span {
+            letter-spacing: 1px;
+            color: v.$azul-sieme;
+            position: relative;
+            display: inline-block;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 8px;
+                left: 0;
+                width: 100%;
+                height: 12px;
+                background: rgba(v.$azul-sieme, 0.1);
+                z-index: -1;
+            }
+        }
+    }
+
+    .home-description {
+        font-size: 1.1rem;
+        color: v.$texto-corpo;
+        max-width: 500px;
+        line-height: 1.7;
+    }
+
+    .home-actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+
+        .btn {
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &-default {
+                background: transparent;
+                color: v.$azul-sieme;
+                border: 2px solid v.$azul-sieme;
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 20px rgba(v.$azul-sieme, 0.3);
+                }
+            }
+
+            &-whatsapp {
+                background-color: #25D366;
+                color: v.$branco;
+                gap: 10px;
+                // Mantemos a animação de pulso específica para o WhatsApp aqui
+                animation: pulse-whatsapp 2s infinite; 
+                
+                &:hover {
+                    transform: translateY(-5px) scale(1.02);
+                }
+            }
+        }
+    }
+
+.home-image-wrapper {
+    width: 100%;
+    height: 350px;
+    border-radius: 25px;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 15px; 
+        left: 15px;
+        width: 100%;
+        height: 100%;
+        background-color: v.$azul-sieme;
+        opacity: 0.1; 
+        border-radius: 25px;
+        z-index: -1;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .home-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        display: block;
+    }
+
+    // --- ISOLAMENTO DO MOUSE ---
+    @media (hover: hover) {
+        &:hover::before {
+            transform: translate(-12px, -12px);
+            opacity: 0.2;
+            background-color: v.$azul-sieme;
+        }
+        
+        &:hover .home-image {
+            transform: scale(1.01);
+            transition: transform 0.5s ease;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .home-image-wrapper {
+        height: 500px;
+    }
+}
+
+    .home-trust {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        p {
+            background: rgba(v.$azul-sieme, 0.05);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(v.$azul-sieme, 0.1);
+            font-size: 0.9rem;
+            color: v.$azul-profundo;
+            &:hover{
+                background: rgba(v.$azul-sieme, 0.1);
+            }
+            i { color: #28a745; margin-right: 8px; }
+        }
+    }
+
+    @media (min-width: 1024px) {
+        padding: 80px 6%;
+
+        .home-container {
+            grid-template-columns: 1.1fr 0.9fr;
+            padding: 60px 80px;
+            gap: 60px;
+        }
+
+        .home-content {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .home-actions {
+            flex-direction: row;
+            .btn { width: auto; }
+        }
+
+        .home-image-wrapper {
+            height: 500px;
+        }
+
+        .home-trust {
+            flex-direction: row;
+            gap: 30px;
+        }
+    }
+}
+

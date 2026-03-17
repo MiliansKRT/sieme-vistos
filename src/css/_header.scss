@@ -1,0 +1,127 @@
+@use 'variables' as v;
+
+header {
+    // Efeito de vidro (Glassmorphism)
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(v.$azul-profundo, 0.95);
+        
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000; // Garantir que fique acima
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 5%;
+        min-height: 70px;
+        max-width: 1400px;
+        margin: 0 auto;
+
+        .logo-link {
+            transition: transform 0.3s ease;
+            .logo-img {
+                width: 110px;
+                animation: fadeIn 1.5s ease-out forwards;
+            }
+            &:hover { transform: scale(1.05); }
+        }
+
+        // --- MOBILE BOTÕES ---
+        .btn-mobile {
+            display: block; // Visível apenas no mobile por padrão
+            background: none;
+            border: none;
+            color: v.$branco;
+            font-size: 1.5rem;
+            cursor: pointer;
+            order: 2; // Mantém o hambúrguer entre a logo e o whats no mobile se quiser
+        }
+
+        .btn-default {
+            display: none; // Escondido no mobile para não amontoar
+            .nav-logo-contato {
+                width: 25px;
+            }
+        }
+
+        // --- MENU LINKS (Lógica Mobile) ---
+        ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(4, 12, 29, 0.98);
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            padding: 0;
+
+            &.show {
+                max-height: 400px;
+                opacity: 1;
+                padding: 2rem 0;
+                border-bottom: 2px solid v.$azul-sieme;
+            }
+
+            li a {
+                color: #e1e4e8;
+                text-decoration: none;
+                font-family: v.$font-principal;
+                font-size: 1.2rem;
+                transition: color 0.3s ease;
+                &:hover { color: v.$azul-sieme; }
+            }
+        }
+
+        // --- RESPONSIVIDADE
+        @media (min-width: 769px) {
+            padding: 15px 5%;
+
+            .btn-mobile {
+                display: none; // Esconde hambúrguer
+            }
+
+            .logo-link .logo-img {
+                width: 140px;
+            }
+
+            ul {
+                position: static; // Volta para o fluxo da navbar
+                max-height: none;
+                opacity: 1;
+                overflow: visible;
+                background-color: transparent;
+                flex-direction: row;
+                width: auto;
+                gap: 2rem;
+                padding: 0;
+
+                li a {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    &:hover {
+                        border-bottom: 2px solid v.$azul-sieme;
+                    }
+                }
+            }
+
+            .btn-default {
+                display: flex; // Reaparece o botão de contato
+                align-items: center;
+                transition: transform 0.3s ease;
+                &:hover { transform: scale(1.1); }
+            }
+        }
+    }
+}

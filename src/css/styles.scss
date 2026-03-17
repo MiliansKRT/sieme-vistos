@@ -1,0 +1,101 @@
+@use 'sass:color';
+@use 'variables' as v;
+@use 'keyframes';
+@use 'mixins';
+@use 'header';
+@use 'home';
+@use 'services';
+@use 'schedule';
+@use 'about';
+@use 'footer';
+
+* {
+    scroll-margin-top: 100px; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    cursor: default;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f2f5; 
+    min-height: 100vh;
+    overflow-x: hidden; // Evita rolagem horizontal por causa das animações
+}
+
+main {
+    flex: 1;
+    width: 100%;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+// Estilo Global de Títulos (usado em Services, About, etc)
+.title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    text-transform: uppercase;
+    color: v.$azul-profundo;
+    font-weight: 800;
+    text-align: center;
+    position: relative;
+    margin-bottom: 40px;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: v.$azul-sieme;
+        margin: 15px auto 0;
+        border-radius: 2px;
+    }
+}
+
+#container {
+    width: 100%;
+}
+
+/* --- BOTÕES GLOBAIS --- 
+   Nota: Os estilos específicos de botões da Home/About 
+   estão nos seus respectivos arquivos para maior organização.
+*/
+
+.btn {
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    img, i {
+        cursor: pointer;
+    }
+}
+
+/* BOTÃO MENU MOBILE */
+.btn-mobile {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    color: v.$azul-profundo;
+    cursor: pointer;
+    font-size: 1.5rem;
+    
+    &:hover {
+        transform: scale(1.1);
+        color: v.$azul-sieme;
+    }
+}

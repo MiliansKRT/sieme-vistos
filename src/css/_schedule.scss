@@ -1,0 +1,109 @@
+@use 'variables' as v;
+@use 'keyframes' as *;
+
+#schedule {
+    padding: 60px 5%; // Padding lateral fixo para segurança
+    background-color: #f0f2f5; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; // Impede que qualquer coisa crie barra de rolagem lateral
+
+    .title {
+        color: v.$azul-profundo;
+        text-align: center;
+        font-size: clamp(1.8rem, 5vw, 2.5rem); // Título responsivo
+        margin-bottom: 30px;
+        width: 100%;
+        max-width: 100%; // Garante que o texto não fuja
+    }
+
+    .schedule-wrapper {
+        background-color: v.$branco;
+        padding: 30px 20px;
+        border-radius: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        width: 100%; // Ocupa a largura do padding do pai
+        max-width: 1000px; // Limite para desktop
+    }
+
+.schedule-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 6px solid v.$branco; // Moldura fixa para todas as telas
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+
+    // --- ISOLAMENTO DO MOUSE ---
+    @media (hover: hover) {
+        &:hover {
+            transform: scale(1.03) rotate(1.5deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: v.$branco;
+        }
+    }
+}
+
+    .schedule-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .schedule-description {
+        color: v.$texto-corpo;
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: center;
+        max-width: 500px; // Evita linhas muito longas no desktop
+    }
+
+    .btn-default {
+        padding: 16px 30px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 50px;
+        background-color: v.$azul-sieme;
+        color: v.$branco;
+        animation: pulse-blue 2s infinite;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+            animation: none;
+            background-color: v.$azul-profundo;
+        }
+    }
+
+    // AJUSTE DESKTOP
+    @media (min-width: 992px) {
+        padding: 100px 5%;
+
+        .schedule-wrapper {
+            flex-direction: row; // Lado a lado
+            padding: 60px;
+            justify-content: space-evenly;
+            text-align: left;
+        }
+
+        .schedule-content {
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .schedule-description {
+            text-align: left;
+        }
+    }
+}

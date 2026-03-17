@@ -1,0 +1,79 @@
+@use 'variables' as v;
+
+#services {
+    padding: 80px 6%;
+    background: linear-gradient(180deg, v.$branco 0%, #f0f2f5 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+.services-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 400px)); 
+        gap: 30px;
+        width: 100%;
+        max-width: 1200px;
+        justify-content: center; 
+
+        .services-card {
+            background-color: v.$branco; 
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+            height: 100%;
+            width: 100%;
+            
+            // 1. ADICIONA ISTO: Define a base para o movimento
+            position: relative; 
+            transform: translateY(0); 
+            // Garante que a transição seja aplicada a todas as propriedades
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+
+            // --- ISOLAMENTO DO MOUSE ---
+            @media (hover: hover) {
+                &:hover {
+                    // 2. ADICIONA O !important se houver algum conflito de biblioteca
+                    transform: translateY(-15px) !important; 
+                    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+                    border-color: rgba(v.$azul-sieme, 0.3);
+                    z-index: 10; // Faz o card ficar "por cima" dos outros ao subir
+                }
+            }
+
+            // ... restante do código (img, description, rate)
+            img {
+                width: 100%;
+                height: 220px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .services-card-description {
+                padding: 30px 25px 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: v.$azul-profundo;
+                flex-grow: 1; 
+            }
+
+            .services-rate {
+                background-color: #f8f9fa;
+                padding: 10px 18px;
+                border-radius: 15px;
+                margin: 0 auto 25px; 
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                i { color: #FFD700; }
+            }
+        }
+    }
+}
