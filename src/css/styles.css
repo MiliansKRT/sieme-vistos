@@ -579,6 +579,7 @@ header .navbar ul li a:hover {
   font-size: clamp(2rem, 5vw, 2.8rem);
   text-align: center;
   width: 100%;
+  margin-bottom: 20px;
 }
 #about .about-container .about-content {
   display: grid;
@@ -611,25 +612,44 @@ header .navbar ul li a:hover {
 }
 #about .about-container .about-content .about-cards-container {
   padding: 40px 25px;
+}
+#about .about-container .about-content .about-cards-container .about-info h3 {
+  color: #1f73c6;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+#about .about-container .about-content .about-cards-container .about-info > p {
+  color: #4a5568;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+#about .about-container .about-content .about-cards-container .about-info .values-list {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
-#about .about-container .about-content .about-cards-container .about-info h3 {
-  color: #1f73c6;
-  font-size: 1.6rem;
+#about .about-container .about-content .about-cards-container .about-info .values-list .value-item h4 {
+  color: #040c1d;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-#about .about-container .about-content .about-cards-container .about-info p {
+#about .about-container .about-content .about-cards-container .about-info .values-list .value-item h4 i {
+  color: #1f73c6;
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+#about .about-container .about-content .about-cards-container .about-info .values-list .value-item p {
   color: #4a5568;
   text-align: justify;
-  font-size: 1.05rem;
-  line-height: 1.8;
-}
-#about .about-container .about-content .about-cards-container .about-info p span {
-  color: #040c1d;
-  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 @media (min-width: 1024px) {
   #about .about-container .about-content {
