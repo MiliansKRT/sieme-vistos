@@ -55,19 +55,46 @@
                 padding: 40px 25px;
 
                 .about-info {
+                    margin-bottom: 50px; // Espaço entre o Quem Somos e os Valores
+
                     h3 {
                         color: v.$azul-sieme;
                         font-size: 1.8rem;
                         font-weight: 700;
-                        margin-bottom: 15px;
+                        margin-bottom: 20px;
                     }
 
-                    // Descrição inicial dos valores
-                    & > p {
+                    p {
                         color: v.$texto-corpo;
-                        font-size: 1.05rem;
-                        line-height: 1.8;
-                        margin-bottom: 40px;
+                        text-align: justify;
+                        font-size: 1.1rem;
+                        line-height: 1.7;
+                        margin-bottom: 20px; // Espaço entre parágrafos
+
+                        span {
+                            color: v.$azul-profundo;
+                            font-weight: 600;
+                        }
+                    }
+
+                    // Estilo específico para a frase com o ícone de localização
+                    .location-tag {
+                        color: v.$azul-sieme;
+                        font-weight: 700;
+                        margin-top: 30px;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        
+                        // --- ADICIONE ISTO ---
+                        padding-bottom: 20px;
+                        border-bottom: 2px solid color.scale(v.$azul-sieme, $alpha: -80%);
+                        margin-bottom: 40px; // Espaço até o próximo título
+                        // ---------------------
+
+                        i {
+                            font-size: 1.2rem;
+                        }
                     }
 
                     .values-list {

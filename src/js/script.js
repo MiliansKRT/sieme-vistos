@@ -1,4 +1,4 @@
-// 1. Menu Mobile com fechamento automático
+// Menu Mobile com fechamento automático
 const mobileBtn = document.querySelector('.btn-mobile');
 const navLinks = document.getElementById('nav-links');
 const icon = document.querySelector('.btn-mobile i');
@@ -25,7 +25,7 @@ links.forEach(link => {
     });
 });
 
-// 2. Header Shrink (Efeito de redução ao rolar a página)
+// Header Shrink (Efeito de redução ao rolar a página)
 window.addEventListener("scroll", () => {
     const header = document.querySelector("header");
     if (header) {
@@ -34,7 +34,7 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// 3. Sistema de Animação de Entrada e Saída (Scroll Reveal)
+// Sistema de Animação de Entrada e Saída (Scroll Reveal)
 const observerOptions = {
     threshold: 0.12, // Dispara quando 12% do elemento está visível
     rootMargin: "0px 0px -50px 0px" // Margem de segurança para o disparo
@@ -61,7 +61,6 @@ animatedElements.forEach(el => {
     observer.observe(el);
 });
 
-// 4. Injeção de CSS Crítico para Performance e Correção Mobile
 // Isso garante que as animações funcionem mesmo se o SCSS demorar a carregar
 document.head.insertAdjacentHTML('beforeend', `
     <style>
@@ -93,3 +92,21 @@ document.head.insertAdjacentHTML('beforeend', `
         }
     </style>
 `);
+
+// Lógica do Acordeão do FAQ
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    
+    question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        
+        // Fecha todos os outros (Opcional - remova se quiser permitir vários abertos)
+        faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+        
+        // Abre o atual se não estiver ativo
+        if (!isActive) {
+            item.classList.add('active');
+        }
+    });
+});

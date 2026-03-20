@@ -7,40 +7,46 @@
 @use 'services';
 @use 'schedule';
 @use 'about';
+@use 'faq';
 @use 'footer';
 
+// --- RESET & BASE ---
 * {
-    scroll-margin-top: 100px; 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    cursor: default;
 }
 
 html {
     scroll-behavior: smooth;
+    // Removido o scroll-margin-top global daqui
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     background-color: #f0f2f5; 
     min-height: 100vh;
-    overflow-x: hidden; // Evita rolagem horizontal por causa das animações
+    overflow-x: hidden; 
+    line-height: 1.6; // Melhora a leitura global
+}
+
+// Aplicar o recuo apenas nas SEÇÕES, para o menu não cobrir o título
+section {
+    scroll-margin-top: 100px; // Ajuste para a altura exata da sua Navbar
+    cursor: default;
 }
 
 main {
-    flex: 1;
     width: 100%;
 }
 
-a {
+a, button, .btn {
     cursor: pointer;
     text-decoration: none;
 }
 
-// Estilo Global de Títulos (usado em Services, About, etc)
+// --- COMPONENTES GLOBAIS ---
+
 .title {
     font-size: clamp(2rem, 5vw, 2.8rem);
     text-transform: uppercase;
@@ -61,27 +67,85 @@ a {
     }
 }
 
-#container {
-    width: 100%;
-}
-
-/* --- BOTÕES GLOBAIS --- 
-   Nota: Os estilos específicos de botões da Home/About 
-   estão nos seus respectivos arquivos para maior organização.
-*/
-
 .btn {
-    text-decoration: none;
     border-radius: 12px;
     font-weight: 700;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+
+    &-default {
+        background: transparent;
+        color: v.$azul-sieme;
+        gap: 10px;
+        border: 2px solid v.$azul-sieme;
+        
+        &:hover {
+            background: rgba(v.$azul-sieme, 0.05);
+            transform: translateY(-5px);
+        }
+    }
+
+    &-whatsapp {
+        background-color: #25D366;
+        color: v.$branco;
+        gap: 10px;
+        border: none;
+        animation: pulse-whatsapp 2s infinite; 
+
+        &:hover {
+            transform: translateY(-5px) scale(1.03);
+            filter: brightness(1.1);
+            // A animação continua rodando aqui
+        }
+    }
+    &-fixed-whatsapp{
+        position: fixed;
+        bottom: 30px; // Distância do fundo
+        right: 30px;  // Distância da direita
+        width: 60px;
+        height: 60px;
+        background-color: #25D366;
+        border-radius: 50%; // Deixa o botão redondo
+        z-index: 1100; // Valor maior que o header (1000) para ficar sempre por cima
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        animation: pulse-whatsapp 2s infinite;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: none;
+
+        .nav-logo-contato {
+            width: 35px; // Tamanho do ícone dentro do círculo
+            height: auto;
+            // O filtro abaixo garante que o ícone fique branco se o seu SVG original for preto, 
+            // caso o ícone já seja colorido/branco, ignore esta linha:
+            // filter: brightness(0) invert(1); 
+        }
+
+        &:hover {
+            transform: scale(1.1) translateY(-5px);
+            filter: brightness(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        // Ajuste para telas menores para não cobrir tanto conteúdo
+        @media (max-width: 768px) {
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+
+            .nav-logo-contato {
+                width: 30px;
+            }
+        }
+    }
 
     img, i {
-        cursor: pointer;
+        pointer-events: none; // Evita que o clique pegue no ícone em vez do botão
     }
 }
 
@@ -91,11 +155,18 @@ a {
     border: none;
     padding: 10px;
     color: v.$azul-profundo;
-    cursor: pointer;
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     &:hover {
         transform: scale(1.1);
         color: v.$azul-sieme;
     }
+}
+
+#container {
+    width: 100%;
+    max-width: 100vw;
 }
